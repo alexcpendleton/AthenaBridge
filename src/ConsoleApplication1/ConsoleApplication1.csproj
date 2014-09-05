@@ -39,7 +39,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UIAutomationClient" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -52,6 +51,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{2c72eb13-70e9-4bea-9962-ec08f1a74280}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormInstantiationImplementation\FormInstantiationImplementation.csproj">
+      <Project>{25c5c993-cdaf-4047-8763-63924b917bff}</Project>
+      <Name>FormInstantiationImplementation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
