@@ -174,7 +174,7 @@ namespace FormInstantiationImplementation
             } 
         }
 
-        public class MainFormControlMap
+        public class MainFormControlMap : IMainFormControlMap
         {
             public Button btnSearch { get; set; }
 
@@ -219,22 +219,26 @@ namespace FormInstantiationImplementation
         }
     }
 
-    public class LayoutFiller
+    public class LexiconBuilder
     {
-        public LayoutData Fill(FiiV138bBridge.MainFormControlMap map)
+        public Lexicon Build(IMainFormControlMap controlMap)
         {
-            var result = new LayoutData();
-            result.BlademasterSkillFilters = new LayoutData.ComboBoxLayoutItem();
-            result.BlademasterSkillFilters.ID = "BlademasterSkillFilters";
+            var results = new Lexicon();
 
-            foreach (var filter in map.BlademasterSkillFilters)
-            {
-                foreach (var item in filter.Items)
-                {
-                }
-            }
-            //result.BlademasterSkillFilters.LabelText = 
-            return result;
+            return results;
+        }
+
+        public KeyValuePair<string, object>? BuildButton(Button button)
+        {
+            if (button == null) return null;
+            var results = new KeyValuePair<string, object>(button.Name, button.Text);
+            return results;
+        }
+
+        public void SetPairInLexicon(Lexicon lexicon, KeyValuePair<string, object>? pair)
+        {
+            if (pair == null || !pair.HasValue) return;
+            lexicon[pair.Value.Key] = pair.Value.Value;
         }
     }
 
@@ -260,28 +264,21 @@ namespace FormInstantiationImplementation
      * I think that's it. 
      * */
 
-    public class Lexicon
+    public class Lexicon : Dictionary<string, object>
     {
-        public Lexicon()
-        {
-            Items = new Dictionary<string, object>();
-        }
-        public Dictionary<string, object> Items { get; set; } 
+        public Lexicon() { }
     }
 
-    public class FieldValues
+    public class FieldValues : Dictionary<string, object>
     {
-        public FieldValues()
-        {
-            Items = new Dictionary<string, object>();
-        }
-        public Dictionary<string, object> Items { get; set; } 
+        public FieldValues() { }
     }
 
     public class QueryResponse
     {
-        public bool IsSearchInProgress { get; set; p
-        pro
+        public bool IsSearchInProgress { get; set; }
+        public int PercentComplete { get; set; }
+        public object Results { get; set; } // Don't know what exactly will be here
     }
 
     public class LayoutData
