@@ -135,5 +135,20 @@ namespace Pendletron.AthenaBridge.UnitTests.FormInstantiationImplementation
             Assert.AreEqual(expectedValue2, valueByKey);
 
         }
+
+        [TestMethod]
+        public void Build_Visits_AllFormProperties()
+        {
+            // I don't really know how to test this
+            var formMap = FormMapMock();
+            var builder = LB();
+
+            formMap.SetupAllProperties();
+
+            var lexicon = builder.Build();
+
+            bool allPropertiesVisited = false;
+            Assert.IsTrue(allPropertiesVisited);
+        }
     }
 }
